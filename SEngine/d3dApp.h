@@ -5,12 +5,16 @@
 #include <string>
 #include <d3d11_1.h>
 #include <DirectXMath.h>
+#include <memory>
 #include "Mouse.h"
 #include "Keyboard.h"
 #include "GameTimer.h"
+#include "Core\Singleton\Graphics.h"
 
 class D3DApp
 {
+	template <class T>
+	using ComPtr = Microsoft::WRL::ComPtr<T>;
 public:
 	D3DApp(HINSTANCE hInstance);    // 在构造函数的初始化列表应当设置好初始参数
 	virtual ~D3DApp();
@@ -28,17 +32,16 @@ public:
 	virtual void DrawScene() = 0;             // 子类需要实现该方法，完成每一帧的绘制
 	virtual LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	// 窗口的消息回调函数
+
 protected:
 	bool InitMainWindow();       // 窗口初始化
-	bool InitDirect3D();         // Direct3D初始化
-
 
 	void CalculateFrameStats();  // 计算每秒帧数并在窗口显示
 
 protected:
 
 	HINSTANCE m_hAppInst;        // 应用实例句柄
-	HWND      m_hMainWnd;        // 主窗口句柄
+	HWND&      m_hMainWnd;        // 主窗口句柄
 	bool      m_AppPaused;       // 应用是否暂停
 	bool      m_Minimized;       // 应用是否最小化
 	bool      m_Maximized;       // 应用是否最大化
@@ -48,23 +51,6 @@ protected:
 
 	GameTimer m_Timer;           // 计时器
 
-
-	// 使用模板别名(C++11)简化类型名
-	template <class T>
-	using ComPtr = Microsoft::WRL::ComPtr<T>;
-	// Direct3D 11
-	ComPtr<ID3D11Device> m_pd3dDevice;							    // D3D11设备
-	ComPtr<ID3D11DeviceContext> m_pd3dImmediateContext;			    // D3D11设备上下文
-	ComPtr<IDXGISwapChain> m_pSwapChain;							// D3D11交换链
-	// Direct3D 11.1
-	ComPtr<ID3D11Device1> m_pd3dDevice1;							// D3D11.1设备
-	ComPtr<ID3D11DeviceContext1> m_pd3dImmediateContext1;			// D3D11.1设备上下文
-	ComPtr<IDXGISwapChain1> m_pSwapChain1;						    // D3D11.1交换链
-	// 常用资源
-	ComPtr<ID3D11Texture2D> m_pDepthStencilBuffer;					// 深度模板缓冲区
-	ComPtr<ID3D11RenderTargetView> m_pRenderTargetView;				// 渲染目标视图
-	ComPtr<ID3D11DepthStencilView> m_pDepthStencilView;				// 深度模板视图
-	D3D11_VIEWPORT m_ScreenViewport;								// 视口
 	// 键鼠输入
 	std::unique_ptr<DirectX::Mouse> m_pMouse;						// 鼠标
 	DirectX::Mouse::ButtonStateTracker m_MouseTracker;				// 鼠标状态追踪器
