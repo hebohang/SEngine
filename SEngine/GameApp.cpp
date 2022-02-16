@@ -219,6 +219,8 @@ bool GameApp::InitResource()
 
 	Graphics::GetContext()->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
 
+	// Graphics::GetContext()->OMSetRenderTargets(1u, Graphics::GetRTV().GetAddressOf(), nullptr);
+
 	// ******************
 	// 设置调试对象名
 	//
