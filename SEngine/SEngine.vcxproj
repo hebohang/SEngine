@@ -175,6 +175,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Bindable\IndexBuffer.cpp" />
+    <ClCompile Include="Core\Drawable\Drawable.cpp" />
     <ClCompile Include="Core\Singleton\Graphics.cpp" />
     <ClCompile Include="d3dApp.cpp" />
     <ClCompile Include="d3dUtil.cpp" />
@@ -185,6 +187,9 @@
     <ClCompile Include="Mouse.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Bindable\Bindable.h" />
+    <ClInclude Include="Core\Bindable\IndexBuffer.h" />
+    <ClInclude Include="Core\Drawable\Drawable.h" />
     <ClInclude Include="Core\Singleton\Graphics.h" />
     <ClInclude Include="d3dApp.h" />
     <ClInclude Include="d3dUtil.h" />
