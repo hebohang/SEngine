@@ -29,9 +29,7 @@ D3DApp::D3DApp(HINSTANCE hInstance)
 	m_AppPaused(false),
 	m_Minimized(false),
 	m_Maximized(false),
-	m_Resizing(false),
-	m_Enable4xMsaa(true),
-	m_4xMsaaQuality(0)
+	m_Resizing(false)
 {
 
 
@@ -138,10 +136,10 @@ void D3DApp::OnResize()
 	depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 	// 要使用 4X MSAA?
-	if (m_Enable4xMsaa)
+	if (Graphics::Enable4xMsaa())
 	{
 		depthStencilDesc.SampleDesc.Count = 4;
-		depthStencilDesc.SampleDesc.Quality = m_4xMsaaQuality - 1;
+		depthStencilDesc.SampleDesc.Quality = Graphics::GetMsaaQuality() - 1;
 	}
 	else
 	{

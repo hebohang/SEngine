@@ -3,8 +3,63 @@
 #include <cassert>
 
 Graphics::Graphics(HWND hWnd)
+	:
+	bEnable4xMsaa(true),
+	m4xMsaaQuality(0),
+	pDevice(nullptr),
+	pSwap(nullptr),
+	pContext(nullptr),
+	pTarget(nullptr),
+	pDSV(nullptr),
+	pDepthStencilBuffer(nullptr)
 {
+	// 先检查是否含有主窗口句柄
 	assert(hWnd);
+
+	// 注记：
+	// 本来想用 D3D11CreateDeviceAndSwapChain 这个API一步到位
+	// 事后发现不用 MSAA 结果是真的难看
+	// 而 MSAA 需要用 CheckMultisampleQualityLevels API 判断
+	// 但是这个API需要device，且结果用于填充交换链的描述符
+	// 因此只能先创建device->判断MSAA情况->创建交换链，顺序不可调换
+
+	HRESULT hr = S_OK;
+
+	// 创建D3D设备 和 D3D设备上下文
+	UINT createDeviceFlags = 0;
+#if defined(DEBUG) || defined(_DEBUG)  
+	createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
+	// 特性等级数组
+	D3D_FEATURE_LEVEL featureLevels[] =
+	{
+		D3D_FEATURE_LEVEL_11_1,
+		D3D_FEATURE_LEVEL_11_0,
+	};
+	UINT numFeatureLevels = ARRAYSIZE(featureLevels);
+	D3D_FEATURE_LEVEL featureLevel;
+	hr = D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags, featureLevels, numFeatureLevels,
+		D3D11_SDK_VERSION, pDevice.GetAddressOf(), &featureLevel, pContext.GetAddressOf());
+	if (hr == E_INVALIDARG)
+	{
+		// Direct3D 11.0 的API不承认D3D_FEATURE_LEVEL_11_1，所以我们需要尝试特性等级11.0以及以下的版本
+		hr = D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags, &featureLevels[1], numFeatureLevels - 1,
+			D3D11_SDK_VERSION, pDevice.GetAddressOf(), &featureLevel, pContext.GetAddressOf());
+	}
+	if (FAILED(hr))
+	{
+		MessageBox(0, L"D3D11CreateDevice Failed.", 0, 0);
+	}
+	// 检测是否支持特性等级11.0或11.1
+	if (featureLevel != D3D_FEATURE_LEVEL_11_0 && featureLevel != D3D_FEATURE_LEVEL_11_1)
+	{
+		MessageBox(0, L"Direct3D Feature Level 11 unsupported.", 0, 0);
+	}
+
+	// 创建好了Device了，现在可以去检测 MSAA支持的质量等级
+	pDevice->CheckMultisampleQualityLevels(
+		DXGI_FORMAT_R8G8B8A8_UNORM, 4, &m4xMsaaQuality);
+	assert(m4xMsaaQuality > 0);
 
 	DXGI_SWAP_CHAIN_DESC sd = {};
 	sd.BufferDesc.Width = 0;
@@ -14,8 +69,17 @@ Graphics::Graphics(HWND hWnd)
 	sd.BufferDesc.RefreshRate.Denominator = 0;
 	sd.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
 	sd.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-	sd.SampleDesc.Count = 1;
-	sd.SampleDesc.Quality = 0;
+	// 是否开启4倍多重采样？
+	if (bEnable4xMsaa)
+	{
+		sd.SampleDesc.Count = 4;
+		sd.SampleDesc.Quality = bEnable4xMsaa - 1;
+	}
+	else
+	{
+		sd.SampleDesc.Count = 1;
+		sd.SampleDesc.Quality = 0;
+	}
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 	sd.BufferCount = 1;
 	sd.OutputWindow = hWnd;
@@ -28,10 +92,8 @@ Graphics::Graphics(HWND hWnd)
 	swapCreateFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
 
-	// for checking results of d3d functions
-	HRESULT hr;
-
-	// create device and front/back buffers, and swap chain and rendering context
+	// 根据官方文档，ID3D11Device** 的参数为NULL将不返回Device，但是我尝试过后续会出问题
+	// 想避开繁琐的 IDXGIFactory 方法创建交换链，于是再创建一次Device
 	HR(D3D11CreateDeviceAndSwapChain(
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
@@ -46,63 +108,6 @@ Graphics::Graphics(HWND hWnd)
 		nullptr,
 		&pContext
 	));
-
-	// gain access to texture subresource in swap chain (back buffer)
-	ComPtr<ID3D11Resource> pBackBuffer;
-	HR(pSwap->GetBuffer(0, __uuidof(ID3D11Resource), &pBackBuffer));
-	HR(pDevice->CreateRenderTargetView(pBackBuffer.Get(), nullptr, &pTarget));
-
-	// create depth stensil state
-	D3D11_DEPTH_STENCIL_DESC dsDesc = {};
-	dsDesc.DepthEnable = TRUE;
-	dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-	dsDesc.DepthFunc = D3D11_COMPARISON_LESS;
-	ComPtr<ID3D11DepthStencilState> pDSState;
-	HR(pDevice->CreateDepthStencilState(&dsDesc, &pDSState));
-
-	// bind depth state
-	pContext->OMSetDepthStencilState(pDSState.Get(), 1u);
-
-	// create depth stensil texture
-	ComPtr<ID3D11Texture2D> pDepthStencil;
-	D3D11_TEXTURE2D_DESC descDepth = {};
-	descDepth.Width = 800u;
-	descDepth.Height = 600u;
-	descDepth.MipLevels = 1u;
-	descDepth.ArraySize = 1u;
-	descDepth.Format = DXGI_FORMAT_D32_FLOAT;
-	descDepth.SampleDesc.Count = 1u;
-	descDepth.SampleDesc.Quality = 0u;
-	descDepth.Usage = D3D11_USAGE_DEFAULT;
-	descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-	HR(pDevice->CreateTexture2D(&descDepth, nullptr, &pDepthStencil));
-
-	// create view of depth stensil texture
-	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV = {};
-	descDSV.Format = DXGI_FORMAT_D32_FLOAT;
-	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
-	descDSV.Texture2D.MipSlice = 0u;
-	HR(pDevice->CreateDepthStencilView(
-		pDepthStencil.Get(), &descDSV, &pDSV
-	));
-
-	// bind depth stensil view to OM
-	pContext->OMSetRenderTargets(1u, pTarget.GetAddressOf(), pDSV.Get());
-
-	// configure viewport
-	ScreenViewport.Width = 800.0f;
-	ScreenViewport.Height = 600.0f;
-	ScreenViewport.MinDepth = 0.0f;
-	ScreenViewport.MaxDepth = 1.0f;
-	ScreenViewport.TopLeftX = 0.0f;
-	ScreenViewport.TopLeftY = 0.0f;
-	pContext->RSSetViewports(1u, &ScreenViewport);
-
-	// 检测 MSAA支持的质量等级
-	UINT m_4xMsaaQuality;
-	pDevice->CheckMultisampleQualityLevels(
-		DXGI_FORMAT_R8G8B8A8_UNORM, 4, &m_4xMsaaQuality);
-	assert(m_4xMsaaQuality > 0);
 }
 
 HWND Graphics::hWnd = nullptr;

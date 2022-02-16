@@ -44,6 +44,14 @@ public:
 	{
 		return GetInstance().pDepthStencilBuffer;
 	}
+	static bool Enable4xMsaa() noexcept
+	{
+		return GetInstance().bEnable4xMsaa;
+	}
+	static UINT GetMsaaQuality() noexcept
+	{
+		return GetInstance().m4xMsaaQuality;
+	}
 public:
 	Graphics(HWND hWnd);
 	~Graphics() = default;
@@ -52,7 +60,11 @@ public:
 	Graphics& operator=(const Graphics&) = delete;
 	Graphics& operator=(Graphics&&) = delete;
 public:
-	static HWND hWnd;
+	static HWND hWnd;             // 主窗口的句柄 
+private:
+	// 友元类 D3DApp 直接用到的
+	bool bEnable4xMsaa;	          // 是否开启4倍多重采样
+	UINT m4xMsaaQuality;          // MSAA支持的质量等级
 private:
 	D3D11_VIEWPORT ScreenViewport;
 	ComPtr<ID3D11Device> pDevice;
