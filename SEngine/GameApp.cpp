@@ -105,9 +105,11 @@ bool GameApp::InitResource()
 	// 设置图元类型，设定输入布局
 	Graphics::GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	Graphics::GetContext()->IASetInputLayout(m_pVertexLayout.Get());
+
+	Graphics::GetContext()->OMSetRenderTargets(1u, Graphics::GetRTV().GetAddressOf(), nullptr);
 	// 将着色器绑定到渲染管线
-	Graphics::GetContext()->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
-	Graphics::GetContext()->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
+	Graphics::GetContext()->VSSetShader(m_pVertexShader.Get(), nullptr, 0u);
+	Graphics::GetContext()->PSSetShader(m_pPixelShader.Get(), nullptr, 0u);
 
 	// ******************
 	// 设置调试对象名
