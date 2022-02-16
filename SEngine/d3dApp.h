@@ -13,6 +13,7 @@
 
 class D3DApp
 {
+protected:
 	template <class T>
 	using ComPtr = Microsoft::WRL::ComPtr<T>;
 public:
