@@ -68,9 +68,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\Cube.hlsli" />
+    <None Include="Shader\Triangle.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\Cube_PS.hlsl" />
     <FxCompile Include="Shader\Cube_VS.hlsl" />
+    <FxCompile Include="Shader\Triangle_PS.hlsl" />
+    <FxCompile Include="Shader\Triangle_VS.hlsl" />
   </ItemGroup>
 </Project>
