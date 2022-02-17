@@ -179,6 +179,7 @@
     <ClCompile Include="Core\Bindable\InputLayout.cpp" />
     <ClCompile Include="Core\Bindable\PixelShader.cpp" />
     <ClCompile Include="Core\Bindable\Topology.cpp" />
+    <ClCompile Include="Core\Bindable\VertexBuffer.cpp" />
     <ClCompile Include="Core\Bindable\VertexShader.cpp" />
     <ClCompile Include="Core\Drawable\Drawable.cpp" />
     <ClCompile Include="Core\Singleton\Graphics.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Core\Bindable\InputLayout.h" />
     <ClInclude Include="Core\Bindable\PixelShader.h" />
     <ClInclude Include="Core\Bindable\Topology.h" />
+    <ClInclude Include="Core\Bindable\VertexBuffer.h" />
     <ClInclude Include="Core\Bindable\VertexShader.h" />
     <ClInclude Include="Core\Drawable\Drawable.h" />
     <ClInclude Include="Core\Singleton\Graphics.h" />

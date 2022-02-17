@@ -1,6 +1,4 @@
-#ifndef GAMEAPP_H
-#define GAMEAPP_H
-
+#pragma once
 #include "Core\Common\d3dApp.h"
 
 class GameApp : public D3DApp
@@ -46,6 +44,3 @@ private:
 	ComPtr<ID3D11PixelShader> m_pPixelShader;		// 像素着色器
 	ConstantBuffer m_CBuffer;	                    // 用于修改GPU常量缓冲区的变量
 };
-
-
-#endif
