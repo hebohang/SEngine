@@ -3,11 +3,6 @@
 #include "DXTrace.h"
 using namespace DirectX;
 
-const D3D11_INPUT_ELEMENT_DESC GameApp::VertexPosColor::inputLayout[2] = {
-	{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-	{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
-};
-
 GameApp::GameApp(HINSTANCE hInstance)
 	: 
 	D3DApp(hInstance), m_CBuffer(),
@@ -27,6 +22,7 @@ bool GameApp::Init()
 	if (!InitResource())
 		return false;
 
+	box = std::make_unique<Box>();
 
 	// 初始化鼠标，键盘不需要
 	m_pMouse->SetWindow(m_hMainWnd);
@@ -81,8 +77,6 @@ void GameApp::DrawScene()
 	static float black[4] = { 0.0f, 0.0f, 0.0f, 1.0f };	// RGBA = (0,0,0,255)
 	Graphics::GetContext()->ClearRenderTargetView(Graphics::GetRTV().Get(), reinterpret_cast<const float*>(&black));
 	Graphics::GetContext()->ClearDepthStencilView(Graphics::GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-
-	box = std::make_unique<Box>();
 
 	// 绘制立方体
 	box->Draw();
