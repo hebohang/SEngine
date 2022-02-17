@@ -9,7 +9,7 @@
 #include "Mouse.h"
 #include "Keyboard.h"
 #include "GameTimer.h"
-#include "Core\Singleton\Graphics.h"
+#include "..\Singleton\Graphics.h"
 
 class D3DApp
 {

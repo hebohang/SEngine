@@ -15,22 +15,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="d3dApp.cpp">
+    <ClCompile Include="Core\Common\d3dApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="d3dUtil.cpp">
+    <ClCompile Include="Core\Common\d3dUtil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\ErrorHandle\DXTrace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameTimer.cpp">
+    <ClCompile Include="Core\Common\GameTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Keyboard.cpp">
+    <ClCompile Include="Core\Common\Keyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Mouse.cpp">
+    <ClCompile Include="Core\Common\Mouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameApp.cpp">
@@ -45,24 +45,33 @@
     <ClCompile Include="Core\Drawable\Drawable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Bindable\Topology.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Bindable\VertexShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Bindable\PixelShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="d3dApp.h">
+    <ClInclude Include="Core\Common\d3dApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="d3dUtil.h">
+    <ClInclude Include="Core\Common\d3dUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\ErrorHandle\DXTrace.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameTimer.h">
+    <ClInclude Include="Core\Common\GameTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Keyboard.h">
+    <ClInclude Include="Core\Common\Keyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Mouse.h">
+    <ClInclude Include="Core\Common\Mouse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameApp.h">
@@ -78,6 +87,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Drawable\Drawable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Bindable\Topology.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Bindable\VertexShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Bindable\PixelShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

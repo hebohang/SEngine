@@ -1,7 +1,7 @@
 #pragma once
+#include "..\Common\d3dApp.h"
 #include <wrl/client.h>
 #include <d3d11.h>
-#include "..\..\d3dApp.h"
 
 class Graphics
 {

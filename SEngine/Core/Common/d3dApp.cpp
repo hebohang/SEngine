@@ -1,7 +1,7 @@
 #include "d3dApp.h"
 #include "d3dUtil.h"
 #include "DXTrace.h"
-#include "Core\Singleton\Graphics.h"
+#include "..\Singleton\Graphics.h"
 #include <sstream>
 
 namespace

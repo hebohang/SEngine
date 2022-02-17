@@ -176,28 +176,34 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Core\Bindable\IndexBuffer.cpp" />
+    <ClCompile Include="Core\Bindable\PixelShader.cpp" />
+    <ClCompile Include="Core\Bindable\Topology.cpp" />
+    <ClCompile Include="Core\Bindable\VertexShader.cpp" />
     <ClCompile Include="Core\Drawable\Drawable.cpp" />
     <ClCompile Include="Core\Singleton\Graphics.cpp" />
-    <ClCompile Include="d3dApp.cpp" />
-    <ClCompile Include="d3dUtil.cpp" />
+    <ClCompile Include="Core\Common\d3dApp.cpp" />
+    <ClCompile Include="Core\Common\d3dUtil.cpp" />
     <ClCompile Include="Core\ErrorHandle\DXTrace.cpp" />
     <ClCompile Include="GameApp.cpp" />
-    <ClCompile Include="GameTimer.cpp" />
-    <ClCompile Include="Keyboard.cpp" />
-    <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Core\Common\GameTimer.cpp" />
+    <ClCompile Include="Core\Common\Keyboard.cpp" />
+    <ClCompile Include="Core\Common\Mouse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Bindable\Bindable.h" />
     <ClInclude Include="Core\Bindable\IndexBuffer.h" />
+    <ClInclude Include="Core\Bindable\PixelShader.h" />
+    <ClInclude Include="Core\Bindable\Topology.h" />
+    <ClInclude Include="Core\Bindable\VertexShader.h" />
     <ClInclude Include="Core\Drawable\Drawable.h" />
     <ClInclude Include="Core\Singleton\Graphics.h" />
-    <ClInclude Include="d3dApp.h" />
-    <ClInclude Include="d3dUtil.h" />
+    <ClInclude Include="Core\Common\d3dApp.h" />
+    <ClInclude Include="Core\Common\d3dUtil.h" />
     <ClInclude Include="Core\ErrorHandle\DXTrace.h" />
     <ClInclude Include="GameApp.h" />
-    <ClInclude Include="GameTimer.h" />
-    <ClInclude Include="Keyboard.h" />
-    <ClInclude Include="Mouse.h" />
+    <ClInclude Include="Core\Common\GameTimer.h" />
+    <ClInclude Include="Core\Common\Keyboard.h" />
+    <ClInclude Include="Core\Common\Mouse.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\Cube.hlsli" />
