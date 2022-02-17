@@ -2,13 +2,13 @@
 #include "..\ErrorHandle\DXTrace.h"
 
 template<typename VertexType>
-InputLayout<VertexType>::InputLayout(Graphics& gfx, VertexType& vertex, ID3DBlob* pVsBlob)
+InputLayout<VertexType>::InputLayout(ID3DBlob* pVsBlob)
 	:
 	pInputLayout(nullptr)
 {
 	Graphics::GetDevice()->CreateInputLayout(
-		vertex.GetInputElementDesc(), 
-		vertex.GetInputElementSize(),
+		VertexType::GetInputElementDesc(),
+		VertexType::GetInputElementSize(),
 		pVsBlob->GetBufferPointer(),
 		pVsBlob->GetBufferSize(),
 		&pInputLayout

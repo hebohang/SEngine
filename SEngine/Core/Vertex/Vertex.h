@@ -10,11 +10,11 @@ struct VertexBase
 	// 运用CRTP，需要保证子类有 std::vector<D3D11_INPUT_ELEMENT_DESC> inputLayouts;
 	// 不影响类大小，我们需要用 sizeof(类名) 去确定 stride ，在 VertexBuffer 中需要
 
-	const D3D11_INPUT_ELEMENT_DESC* GetInputElementDesc() const
+	static const D3D11_INPUT_ELEMENT_DESC* GetInputElementDesc()
 	{
 		return static_cast<Derived*>(this)->inputLayout.data();
 	}
-	const UINT GetInputElementSize() const
+	static const UINT GetInputElementSize()
 	{
 		return static_cast<Derived*>(this)->inputLayout.size();
 	}

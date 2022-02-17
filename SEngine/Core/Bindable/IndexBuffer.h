@@ -5,7 +5,7 @@
 class IndexBuffer : public Bindable
 {
 public:
-	IndexBuffer(std::vector<unsigned short>& indices);
+	IndexBuffer(const std::vector<unsigned short>& indices);
 	void Bind() const override;
 	UINT GetCount() const noexcept
 	{
