@@ -1,22 +1,20 @@
 #include "InputLayout.h"
 #include "..\ErrorHandle\DXTrace.h"
 
-template<typename VertexType>
-InputLayout<VertexType>::InputLayout(ID3DBlob* pVsBlob)
+InputLayout::InputLayout(const std::vector<D3D11_INPUT_ELEMENT_DESC>& layout, ID3DBlob* pVsBlob)
 	:
 	pInputLayout(nullptr)
 {
 	Graphics::GetDevice()->CreateInputLayout(
-		VertexType::GetInputElementDesc(),
-		VertexType::GetInputElementSize(),
+		layout.data(),
+		(UINT)layout.size(),
 		pVsBlob->GetBufferPointer(),
 		pVsBlob->GetBufferSize(),
 		&pInputLayout
 	);
 }
 
-template<typename VertexType>
-void InputLayout<VertexType>::Bind() const
+void InputLayout::Bind() const
 {
 	Graphics::GetContext()->IASetInputLayout(pInputLayout.Get());
 }

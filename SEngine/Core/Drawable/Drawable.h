@@ -10,6 +10,7 @@ class Drawable
 public:
 	Drawable() = default;
 	Drawable(const Drawable&) = delete;
+	virtual ~Drawable() = default;
 	void Draw() const;
 protected:
 	void AddBind(std::unique_ptr<Bindable> bind);

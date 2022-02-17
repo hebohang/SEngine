@@ -42,12 +42,12 @@ Box::Box()
 	};
 	AddBind(std::make_unique<IndexBuffer>(indices));
 
-	auto pVS = std::make_unique<VertexShader>(L"..\\..\\Shader\\Cube_VS.cso", L"..\\..\\Shader\\Cube_VS.hlsl");
+	auto pVS = std::make_unique<VertexShader>(L"..\\SEngine\\Shader\\Cube_VS.cso", L"..\\SEngine\\Shader\\Cube_VS.hlsl");
 	auto pVSBlob = pVS->GetBlob();
 	AddBind(std::move(pVS));
-	AddBind(std::make_unique<InputLayout<VertexPosColor>>(pVSBlob));
+	AddBind(std::make_unique<InputLayout>(vertices[0].GetInputElementVec(), pVSBlob));
 
-	AddBind(std::make_unique<PixelShader>(L"..\\..\\Shader\\Cube_PS.cso", L"..\\..\\Shader\\Cube_PS.hlsl"));
+	AddBind(std::make_unique<PixelShader>(L"..\\SEngine\\Shader\\Cube_PS.cso", L"..\\SEngine\\Shader\\Cube_PS.hlsl"));
 
 	AddBind(std::make_unique<Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
 }

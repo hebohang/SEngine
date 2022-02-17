@@ -17,5 +17,5 @@ void Drawable::Draw() const
 
 void Drawable::AddBind(std::unique_ptr<Bindable> bind)
 {
-	binds.emplace_back(std::move(bind));
+	binds.push_back(std::move(bind));
 }

@@ -9,7 +9,9 @@ const D3D11_INPUT_ELEMENT_DESC GameApp::VertexPosColor::inputLayout[2] = {
 };
 
 GameApp::GameApp(HINSTANCE hInstance)
-	: D3DApp(hInstance), m_CBuffer()
+	: 
+	D3DApp(hInstance), m_CBuffer(),
+	box(nullptr)
 {
 }
 
@@ -22,11 +24,9 @@ bool GameApp::Init()
 	if (!D3DApp::Init())
 		return false;
 
-	if (!InitEffect())
-		return false;
-
 	if (!InitResource())
 		return false;
+
 
 	// 初始化鼠标，键盘不需要
 	m_pMouse->SetWindow(m_hMainWnd);
@@ -82,103 +82,15 @@ void GameApp::DrawScene()
 	Graphics::GetContext()->ClearRenderTargetView(Graphics::GetRTV().Get(), reinterpret_cast<const float*>(&black));
 	Graphics::GetContext()->ClearDepthStencilView(Graphics::GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
+	box = std::make_unique<Box>();
+
 	// 绘制立方体
-	Graphics::GetContext()->DrawIndexed(36, 0, 0);
+	box->Draw();
 	HR(Graphics::GetSwapChain()->Present(0, 0));
 }
 
-
-
-bool GameApp::InitEffect()
-{
-	ComPtr<ID3DBlob> blob;
-
-
-	// 创建顶点着色器
-	HR(CreateShaderFromFile(L"..\\SEngine\\Shader\\Cube_VS.cso", L"..\\SEngine\\Shader\\Cube_VS.hlsl", "VS", "vs_5_0", blob.ReleaseAndGetAddressOf()));
-	HR(Graphics::GetDevice()->CreateVertexShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, m_pVertexShader.GetAddressOf()));
-	// 创建并绑定顶点布局
-	HR(Graphics::GetDevice()->CreateInputLayout(VertexPosColor::inputLayout, ARRAYSIZE(VertexPosColor::inputLayout),
-		blob->GetBufferPointer(), blob->GetBufferSize(), m_pVertexLayout.GetAddressOf()));
-
-	// 创建像素着色器
-	HR(CreateShaderFromFile(L"..\\SEngine\\Shader\\Cube_PS.cso", L"..\\SEngine\\Shader\\Cube_PS.hlsl", "PS", "ps_5_0", blob.ReleaseAndGetAddressOf()));
-	HR(Graphics::GetDevice()->CreatePixelShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, m_pPixelShader.GetAddressOf()));
-
-	return true;
-}
 bool GameApp::InitResource()
 {
-	// ******************
-	// 设置立方体顶点
-	//    5________ 6
-	//    /|      /|
-	//   /_|_____/ |
-	//  1|4|_ _ 2|_|7
-	//   | /     | /
-	//   |/______|/
-	//  0       3
-	VertexPosColor vertices[] =
-	{
-		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f) },
-		{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(0.0f, 1.0f, 1.0f, 1.0f) }
-	};
-	// 设置顶点缓冲区描述
-	D3D11_BUFFER_DESC vbd;
-	ZeroMemory(&vbd, sizeof(vbd));
-	vbd.Usage = D3D11_USAGE_IMMUTABLE;
-	vbd.ByteWidth = sizeof vertices;
-	vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	vbd.CPUAccessFlags = 0;
-	// 新建顶点缓冲区
-	D3D11_SUBRESOURCE_DATA InitData;
-	ZeroMemory(&InitData, sizeof(InitData));
-	InitData.pSysMem = vertices;
-	HR(Graphics::GetDevice()->CreateBuffer(&vbd, &InitData, m_pVertexBuffer.GetAddressOf()));
-
-	// ******************
-	// 索引数组
-	//
-	DWORD indices[] = {
-		// 正面
-		0, 1, 2,
-		2, 3, 0,
-		// 左面
-		4, 5, 1,
-		1, 0, 4,
-		// 顶面
-		1, 5, 6,
-		6, 2, 1,
-		// 背面
-		7, 6, 5,
-		5, 4, 7,
-		// 右面
-		3, 2, 6,
-		6, 7, 3,
-		// 底面
-		4, 0, 3,
-		3, 7, 4
-	};
-	// 设置索引缓冲区描述
-	D3D11_BUFFER_DESC ibd;
-	ZeroMemory(&ibd, sizeof(ibd));
-	ibd.Usage = D3D11_USAGE_IMMUTABLE;
-	ibd.ByteWidth = sizeof indices;
-	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	ibd.CPUAccessFlags = 0;
-	// 新建索引缓冲区
-	InitData.pSysMem = indices;
-	HR(Graphics::GetDevice()->CreateBuffer(&ibd, &InitData, m_pIndexBuffer.GetAddressOf()));
-	// 输入装配阶段的索引缓冲区设置
-	Graphics::GetContext()->IASetIndexBuffer(m_pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
-
-
 	// ******************
 	// 设置常量缓冲区描述
 	//
@@ -200,34 +112,13 @@ bool GameApp::InitResource()
 	));
 	m_CBuffer.proj = XMMatrixTranspose(XMMatrixPerspectiveFovLH(XM_PIDIV2, AspectRatio(), 1.0f, 1000.0f));
 
-	// ******************
-	// 给渲染管线各个阶段绑定好所需资源
-	//
-
-	// 输入装配阶段的顶点缓冲区设置
-	UINT stride = sizeof(VertexPosColor);	// 跨越字节数
-	UINT offset = 0;						// 起始偏移量
-
-	Graphics::GetContext()->IASetVertexBuffers(0, 1, m_pVertexBuffer.GetAddressOf(), &stride, &offset);
-	// 设置图元类型，设定输入布局
-	Graphics::GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	Graphics::GetContext()->IASetInputLayout(m_pVertexLayout.Get());
-	// 将着色器绑定到渲染管线
-	Graphics::GetContext()->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
 	// 将更新好的常量缓冲区绑定到顶点着色器
 	Graphics::GetContext()->VSSetConstantBuffers(0, 1, m_pConstantBuffer.GetAddressOf());
-
-	Graphics::GetContext()->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
 
 	// ******************
 	// 设置调试对象名
 	//
-	D3D11SetDebugObjectName(m_pVertexLayout.Get(), "VertexPosColorLayout");
-	D3D11SetDebugObjectName(m_pVertexBuffer.Get(), "VertexBuffer");
-	D3D11SetDebugObjectName(m_pIndexBuffer.Get(), "IndexBuffer");
 	D3D11SetDebugObjectName(m_pConstantBuffer.Get(), "ConstantBuffer");
-	D3D11SetDebugObjectName(m_pVertexShader.Get(), "Cube_VS");
-	D3D11SetDebugObjectName(m_pPixelShader.Get(), "Cube_PS");
 
 	return true;
 }
