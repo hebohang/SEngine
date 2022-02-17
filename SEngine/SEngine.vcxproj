@@ -176,6 +176,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Core\Bindable\IndexBuffer.cpp" />
+    <ClCompile Include="Core\Bindable\InputLayout.cpp" />
     <ClCompile Include="Core\Bindable\PixelShader.cpp" />
     <ClCompile Include="Core\Bindable\Topology.cpp" />
     <ClCompile Include="Core\Bindable\VertexShader.cpp" />
@@ -184,6 +185,7 @@
     <ClCompile Include="Core\Common\d3dApp.cpp" />
     <ClCompile Include="Core\Common\d3dUtil.cpp" />
     <ClCompile Include="Core\ErrorHandle\DXTrace.cpp" />
+    <ClCompile Include="Core\Vertex\Vertex.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="Core\Common\GameTimer.cpp" />
     <ClCompile Include="Core\Common\Keyboard.cpp" />
@@ -192,6 +194,7 @@
   <ItemGroup>
     <ClInclude Include="Core\Bindable\Bindable.h" />
     <ClInclude Include="Core\Bindable\IndexBuffer.h" />
+    <ClInclude Include="Core\Bindable\InputLayout.h" />
     <ClInclude Include="Core\Bindable\PixelShader.h" />
     <ClInclude Include="Core\Bindable\Topology.h" />
     <ClInclude Include="Core\Bindable\VertexShader.h" />
@@ -200,6 +203,7 @@
     <ClInclude Include="Core\Common\d3dApp.h" />
     <ClInclude Include="Core\Common\d3dUtil.h" />
     <ClInclude Include="Core\ErrorHandle\DXTrace.h" />
+    <ClInclude Include="Core\Vertex\Vertex.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="Core\Common\GameTimer.h" />
     <ClInclude Include="Core\Common\Keyboard.h" />
