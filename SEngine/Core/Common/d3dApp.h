@@ -20,9 +20,9 @@ public:
 	D3DApp(HINSTANCE hInstance);    // 在构造函数的初始化列表应当设置好初始参数
 	virtual ~D3DApp();
 
-	HINSTANCE AppInst()const;       // 获取应用实例的句柄
-	HWND      MainWnd()const;       // 获取主窗口句柄
-	float     AspectRatio()const;   // 获取屏幕宽高比
+	HINSTANCE AppInst() const;       // 获取应用实例的句柄
+	HWND      MainWnd() const;       // 获取主窗口句柄
+	static float GetAspectRatio();   // 获取屏幕宽高比
 
 	int Run();                      // 运行程序，执行消息事件的循环
 
@@ -57,8 +57,8 @@ protected:
 	DirectX::Keyboard::KeyboardStateTracker m_KeyboardTracker;		// 键盘状态追踪器
 	// 派生类应该在构造函数设置好这些自定义的初始参数
 	std::wstring m_MainWndCaption;									// 主窗口标题
-	int m_ClientWidth;												// 视口宽度
-	int m_ClientHeight;												// 视口高度
+	static int m_ClientWidth;												// 视口宽度
+	static int m_ClientHeight;												// 视口高度
 };
 
 #endif // D3DAPP_H

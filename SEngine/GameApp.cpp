@@ -6,7 +6,8 @@ using namespace DirectX;
 GameApp::GameApp(HINSTANCE hInstance)
 	: 
 	D3DApp(hInstance), m_CBuffer(),
-	box(nullptr)
+	box(nullptr),
+	cam(nullptr)
 {
 }
 
@@ -18,6 +19,10 @@ bool GameApp::Init()
 {
 	if (!D3DApp::Init())
 		return false;
+
+	cam = std::make_unique<FirstPersonCamera>();
+	cam->LookAt({ 0.0f, 0.0f, -5.0f }, { 0.0f, 0.0f, 0.0f });
+	cam->ActiveCamera();
 
 	if (!InitResource())
 		return false;
@@ -99,12 +104,6 @@ bool GameApp::InitResource()
 
 	// 初始化常量缓冲区的值
 	m_CBuffer.world = XMMatrixIdentity();
-	m_CBuffer.view = XMMatrixTranspose(XMMatrixLookAtLH(
-		XMVectorSet(0.0f, 0.0f, -5.0f, 0.0f),
-		XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f),
-		XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f)
-	));
-	m_CBuffer.proj = XMMatrixTranspose(XMMatrixPerspectiveFovLH(XM_PIDIV2, AspectRatio(), 1.0f, 1000.0f));
 
 	// 将更新好的常量缓冲区绑定到顶点着色器
 	Graphics::GetContext()->VSSetConstantBuffers(0, 1, m_pConstantBuffer.GetAddressOf());

@@ -16,6 +16,12 @@ XMMATRIX Transform::GetModelMatrix() const
 	return World;
 }
 
+DirectX::XMMATRIX Transform::GetModelInverseMatrix() const
+{
+	XMMATRIX InvWorld = XMMatrixInverse(nullptr, GetModelMatrix());
+	return InvWorld;
+}
+
 
 void Transform::SetScale(const XMFLOAT3& scale)
 {
@@ -84,6 +90,24 @@ void Transform::Translate(const XMFLOAT3& direction, float magnitude)
 	XMVECTOR directionVec = XMVector3Normalize(XMLoadFloat3(&direction));
 	XMVECTOR newPosition = XMVectorMultiplyAdd(XMVectorReplicate(magnitude), directionVec, XMLoadFloat3(&mPosition));
 	XMStoreFloat3(&mPosition, newPosition);
+}
+
+void Transform::LookAt(const XMFLOAT3& target, const XMFLOAT3& up)
+{
+	XMMATRIX View = XMMatrixLookAtLH(XMLoadFloat3(&mPosition), XMLoadFloat3(&target), XMLoadFloat3(&up));
+	XMMATRIX InvView = XMMatrixInverse(nullptr, View);
+	XMFLOAT4X4 rotMatrix;
+	XMStoreFloat4x4(&rotMatrix, InvView);
+	mRotation = GetEulerAnglesFromRotationMatrix(rotMatrix);
+}
+
+void Transform::LookTo(const XMFLOAT3& direction, const XMFLOAT3& up)
+{
+	XMMATRIX View = XMMatrixLookToLH(XMLoadFloat3(&mPosition), XMLoadFloat3(&direction), XMLoadFloat3(&up));
+	XMMATRIX InvView = XMMatrixInverse(nullptr, View);
+	XMFLOAT4X4 rotMatrix;
+	XMStoreFloat4x4(&rotMatrix, InvView);
+	mRotation = GetEulerAnglesFromRotationMatrix(rotMatrix);
 }
 
 XMFLOAT3 Transform::GetEulerAnglesFromRotationMatrix(const XMFLOAT4X4& rotationMatrix)

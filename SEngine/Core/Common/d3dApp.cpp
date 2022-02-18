@@ -12,6 +12,10 @@ namespace
 	D3DApp* g_pd3dApp = nullptr;
 }
 
+int D3DApp::m_ClientWidth = 800;
+int D3DApp::m_ClientHeight = 600;
+
+
 LRESULT CALLBACK
 MainWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -23,8 +27,6 @@ MainWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 D3DApp::D3DApp(HINSTANCE hInstance)
 	: m_hAppInst(hInstance),
 	m_MainWndCaption(L"Mouse and Keyboard"),
-	m_ClientWidth(800),
-	m_ClientHeight(600),
 	m_hMainWnd(Graphics::hWnd),
 	m_AppPaused(false),
 	m_Minimized(false),
@@ -55,7 +57,7 @@ HWND D3DApp::MainWnd()const
 	return m_hMainWnd;
 }
 
-float D3DApp::AspectRatio()const
+float D3DApp::GetAspectRatio()
 {
 	return static_cast<float>(m_ClientWidth) / m_ClientHeight;
 }

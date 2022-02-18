@@ -1,6 +1,7 @@
 #include "Box.h"
 #include "..\Bindable\BindableBase.h"
 #include "..\Vertex\Vertex.h"
+#include "..\Bindable\TransformCBuffer.h"
 #include <DirectXMath.h>
 
 Box::Box()
@@ -50,4 +51,6 @@ Box::Box()
 	AddBind(std::make_unique<PixelShader>(L"..\\SEngine\\Shader\\Cube_PS.cso", L"..\\SEngine\\Shader\\Cube_PS.hlsl"));
 
 	AddBind(std::make_unique<Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
+
+	//AddBind(std::make_unique<TransformCBuffer>(trans));
 }
