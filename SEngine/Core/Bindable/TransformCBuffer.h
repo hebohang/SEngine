@@ -7,8 +7,9 @@ class TransformCBuffer : public VertexConstantBuffer<DirectX::XMMATRIX>
 {
 public:
 	TransformCBuffer() = default;
-	TransformCBuffer(const Transform& _TransData);
-	void Update();
+	TransformCBuffer(Transform& _TransData);
+	void Update() const;
+	void Bind() const override;
 public:
-	Transform TransData;
+	Transform& TransData;
 };

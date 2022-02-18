@@ -30,7 +30,7 @@ protected:
 	// 视锥体属性
 	float mNearZ = 1.0f;
 	float mFarZ = 1000.0f;
-	float mFovY = DirectX::XM_PIDIV2;
+	float mFovY = DirectX::XM_PI / 3;
 
 	std::unique_ptr<VertexConstantBuffer<CameraConstantBuffer>> pCameraCbuffer;
 };

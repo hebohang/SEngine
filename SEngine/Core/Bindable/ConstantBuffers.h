@@ -22,7 +22,7 @@ public:
 	}
 	virtual ~ConstantBuffer() = default;
 public:
-	void Update(const CbType& Cb)
+	void Update(const CbType& Cb) const 
 	{
 		D3D11_MAPPED_SUBRESOURCE msr;
 		HR(Graphics::GetContext()->Map(
@@ -42,6 +42,7 @@ protected:
 template<typename CbType>
 class VertexConstantBuffer : public ConstantBuffer<CbType>
 {
+protected:
 	using ConstantBuffer<CbType>::pConstantBufferGPU;
 public:
 	VertexConstantBuffer(const CbType& Cb) : ConstantBuffer<CbType>(Cb) {}
@@ -58,6 +59,7 @@ public:
 template<typename CbType>
 class PixelConstantBuffer : public ConstantBuffer<CbType>
 {
+protected:
 	using ConstantBuffer<CbType>::pConstantBufferGPU;
 public:
 	PixelConstantBuffer(const CbType& Cb) : ConstantBuffer<CbType>(Cb) {}

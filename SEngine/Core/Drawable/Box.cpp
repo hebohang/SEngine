@@ -52,5 +52,5 @@ Box::Box()
 
 	AddBind(std::make_unique<Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
 
-	//AddBind(std::make_unique<TransformCBuffer>(trans));
+	AddBind(std::make_unique<TransformCBuffer>(trans));
 }

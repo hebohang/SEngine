@@ -26,7 +26,7 @@ MainWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 D3DApp::D3DApp(HINSTANCE hInstance)
 	: m_hAppInst(hInstance),
-	m_MainWndCaption(L"Mouse and Keyboard"),
+	m_MainWndCaption(L"SEngine"),
 	m_hMainWnd(Graphics::hWnd),
 	m_AppPaused(false),
 	m_Minimized(false),

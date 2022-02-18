@@ -5,9 +5,9 @@ using namespace DirectX;
 
 GameApp::GameApp(HINSTANCE hInstance)
 	: 
-	D3DApp(hInstance), m_CBuffer(),
-	box(nullptr),
-	cam(nullptr)
+	D3DApp(hInstance),
+	pBox(nullptr),
+	pCam(nullptr)
 {
 }
 
@@ -20,16 +20,15 @@ bool GameApp::Init()
 	if (!D3DApp::Init())
 		return false;
 
-	cam = std::make_unique<FirstPersonCamera>();
-	cam->LookAt({ 0.0f, 0.0f, -5.0f }, { 0.0f, 0.0f, 0.0f });
-	cam->ActiveCamera();
+	pCam = std::make_unique<FirstPersonCamera>();
+	pCam->LookAt({ 0.0f, 0.0f, -5.0f }, { 0.0f, 0.0f, 0.0f });
+	pCam->ActiveCamera();
 
-	if (!InitResource())
-		return false;
+	pBox = std::make_unique<Box>();
+	pBox1 = std::make_unique<Box>();
+	pBox->trans.SetPosition(1.5f, 0.0f, 0.0f);
+	pBox1->trans.SetPosition(-1.5f, 0.0f, 0.0f);
 
-	box = std::make_unique<Box>();
-
-	// 初始化鼠标，键盘不需要
 	m_pMouse->SetWindow(m_hMainWnd);
 	m_pMouse->SetMode(DirectX::Mouse::MODE_ABSOLUTE);
 
@@ -43,7 +42,7 @@ void GameApp::OnResize()
 
 void GameApp::UpdateScene(float dt)
 {
-	static float cubePhi = 0.0f, cubeTheta = 0.0f;
+	float cubePhi = 0.0f, cubeTheta = 0.0f;
 	// 获取鼠标状态
 	Mouse::State mouseState = m_pMouse->GetState();
 	Mouse::State lastMouseState = m_MouseTracker.GetLastState();
@@ -68,13 +67,16 @@ void GameApp::UpdateScene(float dt)
 	if (keyState.IsKeyDown(Keyboard::D))
 		cubeTheta -= dt * 2;
 
-
-	m_CBuffer.world = XMMatrixTranspose(XMMatrixRotationY(cubeTheta) * XMMatrixRotationX(cubePhi));
-	// 更新常量缓冲区，让立方体转起来
-	D3D11_MAPPED_SUBRESOURCE mappedData;
-	HR(Graphics::GetContext()->Map(m_pConstantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedData));
-	memcpy_s(mappedData.pData, sizeof(m_CBuffer), &m_CBuffer, sizeof(m_CBuffer));
-	Graphics::GetContext()->Unmap(m_pConstantBuffer.Get(), 0);
+	//pBox->trans.RotateAxis({ 0.0f, 1.0f, 0.0f }, -cubeTheta);
+	//pBox->trans.RotateAxis({ 1.0f, 0.0f, 0.0f }, -cubePhi);
+	if (keyState.IsKeyDown(Keyboard::W))
+		pBox->trans.Translate({ 0.0f, 0.0f, 1.0f }, 0.01f);	
+	if (keyState.IsKeyDown(Keyboard::S))
+		pBox->trans.Translate({ 0.0f, 0.0f, 1.0f }, -0.01f);
+	if (keyState.IsKeyDown(Keyboard::A))
+		pBox->trans.Translate({ 1.0f, 0.0f, 0.0f }, 0.01f);
+	if (keyState.IsKeyDown(Keyboard::D))
+		pBox->trans.Translate({ 1.0f, 0.0f, 0.0f }, -0.01f);
 }
 
 void GameApp::DrawScene()
@@ -84,34 +86,9 @@ void GameApp::DrawScene()
 	Graphics::GetContext()->ClearDepthStencilView(Graphics::GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
 	// 绘制立方体
-	box->Draw();
+	pBox->Draw();
+	pBox1->Draw();
+
 	HR(Graphics::GetSwapChain()->Present(0, 0));
 }
 
-bool GameApp::InitResource()
-{
-	// ******************
-	// 设置常量缓冲区描述
-	//
-	D3D11_BUFFER_DESC cbd;
-	ZeroMemory(&cbd, sizeof(cbd));
-	cbd.Usage = D3D11_USAGE_DYNAMIC;
-	cbd.ByteWidth = sizeof(ConstantBuffer);
-	cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	// 新建常量缓冲区，不使用初始数据
-	HR(Graphics::GetDevice()->CreateBuffer(&cbd, nullptr, m_pConstantBuffer.GetAddressOf()));
-
-	// 初始化常量缓冲区的值
-	m_CBuffer.world = XMMatrixIdentity();
-
-	// 将更新好的常量缓冲区绑定到顶点着色器
-	Graphics::GetContext()->VSSetConstantBuffers(0, 1, m_pConstantBuffer.GetAddressOf());
-
-	// ******************
-	// 设置调试对象名
-	//
-	D3D11SetDebugObjectName(m_pConstantBuffer.Get(), "ConstantBuffer");
-
-	return true;
-}

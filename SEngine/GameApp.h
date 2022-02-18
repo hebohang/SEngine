@@ -21,16 +21,10 @@ public:
 	void DrawScene();
 
 private:
-	bool InitResource();
+	std::unique_ptr<Box> pBox;
+	std::unique_ptr<Box> pBox1;
 
-private:
-	std::unique_ptr<Box> box;
-
-	std::unique_ptr<FirstPersonCamera> cam;
+	std::unique_ptr<FirstPersonCamera> pCam;
 
 	//std::vector<std::unique_ptr<class Drawable>> drawables;
-
-	ComPtr<ID3D11Buffer> m_pConstantBuffer;		    // 常量缓冲区
-
-	ConstantBuffer m_CBuffer;	                    // 用于修改GPU常量缓冲区的变量
 };
