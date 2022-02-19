@@ -7,8 +7,6 @@
 
 Box::Box()
 {
-	using namespace DirectX;
-
 	Cube cube;
 	BindGeometry(cube);
 
