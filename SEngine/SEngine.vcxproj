@@ -186,6 +186,7 @@
     <ClCompile Include="Core\Component\Transform.cpp" />
     <ClCompile Include="Core\Drawable\Box.cpp" />
     <ClCompile Include="Core\Drawable\Drawable.cpp" />
+    <ClCompile Include="Core\Geometry\GeometryBase.cpp" />
     <ClCompile Include="Core\Singleton\Graphics.cpp" />
     <ClCompile Include="Core\Common\d3dApp.cpp" />
     <ClCompile Include="Core\Common\d3dUtil.cpp" />
@@ -211,6 +212,8 @@
     <ClInclude Include="Core\Component\Transform.h" />
     <ClInclude Include="Core\Drawable\Box.h" />
     <ClInclude Include="Core\Drawable\Drawable.h" />
+    <ClInclude Include="Core\Geometry\Cube.h" />
+    <ClInclude Include="Core\Geometry\GeometryBase.h" />
     <ClInclude Include="Core\Singleton\Graphics.h" />
     <ClInclude Include="Core\Common\d3dApp.h" />
     <ClInclude Include="Core\Common\d3dUtil.h" />
