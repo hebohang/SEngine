@@ -7,7 +7,9 @@ GameApp::GameApp(HINSTANCE hInstance)
 	: 
 	D3DApp(hInstance),
 	pBox(nullptr),
-	pCam(nullptr)
+	pCam(nullptr),
+	pSphere(nullptr),
+	pSphere1(nullptr)
 {
 }
 
@@ -28,6 +30,11 @@ bool GameApp::Init()
 	pBox1 = std::make_unique<Box>();
 	pBox->trans.SetPosition(1.5f, 0.0f, 0.0f);
 	pBox1->trans.SetPosition(-1.5f, 0.0f, 0.0f);
+
+	pSphere = std::make_unique<Sphere>(1.0f, 20, 20, DirectX::XMFLOAT4{1.0f, 0.0f, 0.0f, 1.0f});
+	pSphere->trans.SetPosition(0.0f, 0.0f, 0.0f);	
+	pSphere1 = std::make_unique<Sphere>(0.5f, 20, 20, DirectX::XMFLOAT4{1.0f, 1.0f, 0.0f, 1.0f});
+	pSphere1->trans.SetPosition(1.0f, 0.0f, 0.0f);
 
 	m_pMouse->SetWindow(m_hMainWnd);
 	m_pMouse->SetMode(DirectX::Mouse::MODE_ABSOLUTE);
@@ -70,13 +77,13 @@ void GameApp::UpdateScene(float dt)
 	//pBox->trans.RotateAxis({ 0.0f, 1.0f, 0.0f }, -cubeTheta);
 	//pBox->trans.RotateAxis({ 1.0f, 0.0f, 0.0f }, -cubePhi);
 	if (keyState.IsKeyDown(Keyboard::W))
-		pBox->trans.Translate({ 0.0f, 0.0f, 1.0f }, 0.01f);	
+		pSphere->trans.Translate({ 0.0f, 0.0f, 1.0f }, 0.01f);
 	if (keyState.IsKeyDown(Keyboard::S))
-		pBox->trans.Translate({ 0.0f, 0.0f, 1.0f }, -0.01f);
+		pSphere->trans.Translate({ 0.0f, 0.0f, 1.0f }, -0.01f);
 	if (keyState.IsKeyDown(Keyboard::A))
-		pBox->trans.Translate({ 1.0f, 0.0f, 0.0f }, 0.01f);
+		pSphere->trans.Translate({ 1.0f, 0.0f, 0.0f }, 0.01f);
 	if (keyState.IsKeyDown(Keyboard::D))
-		pBox->trans.Translate({ 1.0f, 0.0f, 0.0f }, -0.01f);
+		pSphere->trans.Translate({ 1.0f, 0.0f, 0.0f }, -0.01f);
 }
 
 void GameApp::DrawScene()
@@ -86,8 +93,10 @@ void GameApp::DrawScene()
 	Graphics::GetContext()->ClearDepthStencilView(Graphics::GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
 	// 绘制立方体
-	pBox->Draw();
-	pBox1->Draw();
+	//pBox->Draw();
+	//pBox1->Draw();
+	pSphere->Draw();
+	pSphere1->Draw();
 
 	HR(Graphics::GetSwapChain()->Present(0, 0));
 }

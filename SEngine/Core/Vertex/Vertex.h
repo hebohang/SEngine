@@ -19,6 +19,8 @@ struct VertexBase
 struct VertexPos : VertexBase<VertexPos>
 {
 	VertexPos(const DirectX::XMFLOAT3& _pos) : pos(_pos) {}
+	VertexPos() = default;
+	VertexPos(const VertexPos&) = default;
 
 	DirectX::XMFLOAT3 pos;
 	static const std::vector<D3D11_INPUT_ELEMENT_DESC> inputLayouts;
@@ -28,6 +30,8 @@ struct VertexPosColor : VertexBase<VertexPosColor>
 {
 	VertexPosColor(const DirectX::XMFLOAT3& _pos, const DirectX::XMFLOAT4& _color) :
 		pos(_pos), color(_color) {}
+	VertexPosColor() = default;
+	VertexPosColor(const VertexPosColor&) = default;
 
 	DirectX::XMFLOAT3 pos;
 	DirectX::XMFLOAT4 color;

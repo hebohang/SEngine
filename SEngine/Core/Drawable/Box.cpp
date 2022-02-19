@@ -1,5 +1,5 @@
 #include "Box.h"
-#include "..\Geometry\Cube.h"
+#include "..\Geometry\CubeGeo.h"
 #include "..\Bindable\BindableBase.h"
 #include "..\Vertex\Vertex.h"
 #include "..\Bindable\TransformCBuffer.h"
@@ -7,7 +7,7 @@
 
 Box::Box()
 {
-	Cube cube;
+	CubeGeo cube;
 	BindGeometry(cube);
 
 	auto pVS = std::make_unique<VertexShader>(L"..\\SEngine\\Shader\\Cube_VS.cso", L"..\\SEngine\\Shader\\Cube_VS.hlsl");

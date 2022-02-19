@@ -75,7 +75,7 @@
     <ClCompile Include="Core\Camera\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Geometry\GeometryBase.cpp">
+    <ClCompile Include="Core\Drawable\Sphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -152,7 +152,13 @@
     <ClInclude Include="Core\Geometry\GeometryBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Geometry\Cube.h">
+    <ClInclude Include="Core\Geometry\CubeGeo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Geometry\SphereGeo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Drawable\Sphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
