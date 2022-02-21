@@ -20,6 +20,11 @@ void Camera::ActiveCamera()
 	pCameraCbuffer->BindToSlot(1u);
 }
 
+void Camera::Update() const
+{
+	pCameraCbuffer->Update({ XMMatrixTranspose(Camera::GetViewXM()) , XMMatrixTranspose(Camera::GetProjXM()) });
+}
+
 // ******************
 // 第一人称/自由视角摄像机
 //
@@ -48,4 +53,44 @@ void FirstPersonCamera::LookTo(const XMFLOAT3& pos, const XMFLOAT3& to, const XM
 {
 	trans.SetPosition(pos);
 	trans.LookTo(to, up);
+}
+
+
+void FirstPersonCamera::Strafe(float d)
+{
+	trans.Translate(trans.GetRightAxis(), d);
+}
+
+void FirstPersonCamera::Walk(float d)
+{
+	XMVECTOR rightVec = trans.GetRightAxisXM();
+	XMVECTOR frontVec = XMVector3Normalize(XMVector3Cross(rightVec, g_XMIdentityR1));
+	XMFLOAT3 front;
+	XMStoreFloat3(&front, frontVec);
+	trans.Translate(front, d);
+}
+
+void FirstPersonCamera::MoveForward(float d)
+{
+	trans.Translate(trans.GetForwardAxis(), d);
+}
+
+void FirstPersonCamera::Pitch(float rad)
+{
+	XMFLOAT3 rotation = trans.GetRotation();
+	// 将绕x轴旋转弧度限制在[-7pi/18, 7pi/18]之间
+	rotation.x += rad;
+	if (rotation.x > XM_PI * 7 / 18)
+		rotation.x = XM_PI * 7 / 18;
+	else if (rotation.x < -XM_PI * 7 / 18)
+		rotation.x = -XM_PI * 7 / 18;
+
+	trans.SetRotation(rotation);
+}
+
+void FirstPersonCamera::RotateY(float rad)
+{
+	XMFLOAT3 rotation = trans.GetRotation();
+	rotation.y = XMScalarModAngle(rotation.y + rad);
+	trans.SetRotation(rotation);
 }

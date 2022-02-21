@@ -24,9 +24,10 @@ public:
 	DirectX::XMMATRIX GetProjXM() const;
 public:
 	void ActiveCamera();
-protected:
+	void Update() const;
+public:
 	Transform trans;
-
+protected:
 	// 视锥体属性
 	float mNearZ = 1.0f;
 	float mFarZ = 1000.0f;
@@ -47,4 +48,19 @@ public:
 	// 设置摄像机的朝向
 	void LookAt(const DirectX::XMFLOAT3& pos, const DirectX::XMFLOAT3& target, const DirectX::XMFLOAT3& up = { 0.0f, 1.0f, 0.0f });
 	void LookTo(const DirectX::XMFLOAT3& pos, const DirectX::XMFLOAT3& to, const DirectX::XMFLOAT3& up = { 0.0f, 1.0f, 0.0f });
+
+	// 平移
+	void Strafe(float d);
+	// 直行(平面移动)
+	void Walk(float d);
+	// 前进(朝前向移动)
+	void MoveForward(float d);
+	// 上下观察
+	// 正rad值向上观察
+	// 负rad值向下观察
+	void Pitch(float rad);
+	// 左右观察
+	// 正rad值向右观察
+	// 负rad值向左观察
+	void RotateY(float rad);
 };

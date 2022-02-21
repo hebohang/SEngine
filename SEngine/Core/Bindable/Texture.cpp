@@ -35,6 +35,20 @@ Texture::Texture(const std::vector<std::wstring>& CubMapPath)
 	}
 }
 
+Texture::Texture(const std::wstring& cubemapFilename)
+{
+	HRESULT hr;
+	// 天空盒纹理加载
+	if (cubemapFilename.substr(cubemapFilename.size() - 3) == L"dds")
+	{
+		HR(DirectX::CreateDDSTextureFromFile(Graphics::GetDevice().Get(),
+			nullptr,
+			cubemapFilename.c_str(),
+			nullptr,
+			pTexture.GetAddressOf()));
+	}
+}
+
 void Texture::Bind() const
 {
 	Graphics::GetContext()->PSSetShaderResources(0, 1, pTexture.GetAddressOf());

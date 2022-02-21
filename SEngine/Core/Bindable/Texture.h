@@ -6,7 +6,8 @@ class Texture : public Bindable
 {
 public:
 	Texture(const wchar_t* TexPath);  // 单张纹理
-	Texture(const std::vector<std::wstring>& CubMapPath);  // 天空盒纹理
+	Texture(const std::vector<std::wstring>& CubMapPath);  // 天空盒纹理 WIC
+	Texture(const std::wstring& cubemapFilename);  // 天空盒纹理 DDS
 	void Bind() const override;
 	void BindToSlot(UINT slot) const;
 private:

@@ -7,6 +7,78 @@ Transform::Transform(const DirectX::XMFLOAT3& scale, const DirectX::XMFLOAT3& ro
 {
 }
 
+XMFLOAT3 Transform::GetScale() const
+{
+	return mScale;
+}
+
+DirectX::XMVECTOR Transform::GetScaleXM() const
+{
+	return XMLoadFloat3(&mScale);
+}
+
+XMFLOAT3 Transform::GetRotation() const
+{
+	return mRotation;
+}
+
+DirectX::XMVECTOR Transform::GetRotationXM() const
+{
+	return XMLoadFloat3(&mRotation);
+}
+
+XMFLOAT3 Transform::GetPosition() const
+{
+	return mPosition;
+}
+
+DirectX::XMVECTOR Transform::GetPositionXM() const
+{
+	return XMLoadFloat3(&mPosition);
+}
+
+XMFLOAT3 Transform::GetRightAxis() const
+{
+	XMMATRIX R = XMMatrixRotationRollPitchYawFromVector(XMLoadFloat3(&mRotation));
+	XMFLOAT3 right;
+	XMStoreFloat3(&right, R.r[0]);
+	return right;
+}
+
+DirectX::XMVECTOR Transform::GetRightAxisXM() const
+{
+	XMFLOAT3 right = GetRightAxis();
+	return XMLoadFloat3(&right);
+}
+
+XMFLOAT3 Transform::GetUpAxis() const
+{
+	XMMATRIX R = XMMatrixRotationRollPitchYawFromVector(XMLoadFloat3(&mRotation));
+	XMFLOAT3 up;
+	XMStoreFloat3(&up, R.r[1]);
+	return up;
+}
+
+DirectX::XMVECTOR Transform::GetUpAxisXM() const
+{
+	XMFLOAT3 up = GetUpAxis();
+	return XMLoadFloat3(&up);
+}
+
+XMFLOAT3 Transform::GetForwardAxis() const
+{
+	XMMATRIX R = XMMatrixRotationRollPitchYawFromVector(XMLoadFloat3(&mRotation));
+	XMFLOAT3 forward;
+	XMStoreFloat3(&forward, R.r[2]);
+	return forward;
+}
+
+DirectX::XMVECTOR Transform::GetForwardAxisXM() const
+{
+	XMFLOAT3 forward = GetForwardAxis();
+	return XMLoadFloat3(&forward);
+}
+
 XMMATRIX Transform::GetModelMatrix() const
 {
 	XMVECTOR scaleVec = XMLoadFloat3(&mScale);

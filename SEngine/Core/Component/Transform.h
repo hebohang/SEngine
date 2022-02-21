@@ -10,6 +10,38 @@ public:
 	Transform() = default;
 	Transform(const DirectX::XMFLOAT3 & scale, const DirectX::XMFLOAT3 & rotation, const DirectX::XMFLOAT3 & position);
 public:
+	// 获取对象缩放比例
+	DirectX::XMFLOAT3 GetScale() const;
+	// 获取对象缩放比例
+	DirectX::XMVECTOR GetScaleXM() const;
+
+	// 获取对象欧拉角(弧度制)
+	// 对象以Z-X-Y轴顺序旋转
+	DirectX::XMFLOAT3 GetRotation() const;
+	// 获取对象欧拉角(弧度制)
+	// 对象以Z-X-Y轴顺序旋转
+	DirectX::XMVECTOR GetRotationXM() const;
+
+	// 获取对象位置
+	DirectX::XMFLOAT3 GetPosition() const;
+	// 获取对象位置
+	DirectX::XMVECTOR GetPositionXM() const;
+
+	// 获取右方向轴
+	DirectX::XMFLOAT3 GetRightAxis() const;
+	// 获取右方向轴
+	DirectX::XMVECTOR GetRightAxisXM() const;
+
+	// 获取上方向轴
+	DirectX::XMFLOAT3 GetUpAxis() const;
+	// 获取上方向轴
+	DirectX::XMVECTOR GetUpAxisXM() const;
+
+	// 获取前方向轴
+	DirectX::XMFLOAT3 GetForwardAxis() const;
+	// 获取前方向轴
+	DirectX::XMVECTOR GetForwardAxisXM() const;
+
 	// 我们真正要传给常量缓冲区的是这个Model矩阵
 	DirectX::XMMATRIX GetModelMatrix() const;
 	// 获取逆世界变换矩阵，从世界空间到局部空间，对于摄像机类来说其实就是它的 view 矩阵
