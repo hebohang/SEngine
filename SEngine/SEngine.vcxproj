@@ -102,6 +102,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>$(ProjectDir)Core\ErrorHandle;$(ProjectDir)Core\Singleton;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -123,6 +124,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>$(ProjectDir)Core\ErrorHandle;$(ProjectDir)Core\Singleton;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -144,6 +146,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>$(ProjectDir)Core\ErrorHandle;$(ProjectDir)Core\Singleton;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -165,6 +168,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>$(ProjectDir)Core\ErrorHandle;$(ProjectDir)Core\Singleton;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -178,6 +182,7 @@
     <ClCompile Include="Core\Bindable\IndexBuffer.cpp" />
     <ClCompile Include="Core\Bindable\InputLayout.cpp" />
     <ClCompile Include="Core\Bindable\PixelShader.cpp" />
+    <ClCompile Include="Core\Bindable\Texture.cpp" />
     <ClCompile Include="Core\Bindable\Topology.cpp" />
     <ClCompile Include="Core\Bindable\TransformCBuffer.cpp" />
     <ClCompile Include="Core\Bindable\VertexBuffer.cpp" />
@@ -205,6 +210,7 @@
     <ClInclude Include="Core\Bindable\IndexBuffer.h" />
     <ClInclude Include="Core\Bindable\InputLayout.h" />
     <ClInclude Include="Core\Bindable\PixelShader.h" />
+    <ClInclude Include="Core\Bindable\Texture.h" />
     <ClInclude Include="Core\Bindable\Topology.h" />
     <ClInclude Include="Core\Bindable\TransformCBuffer.h" />
     <ClInclude Include="Core\Bindable\VertexBuffer.h" />
