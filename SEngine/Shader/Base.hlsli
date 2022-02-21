@@ -1,3 +1,6 @@
+Texture2D g_Tex : register(t0);
+SamplerState g_SamLinear : register(s0);
+
 cbuffer ConstantBuffer : register(b0)
 {
     matrix g_World;
