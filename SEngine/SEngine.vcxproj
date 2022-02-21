@@ -193,6 +193,7 @@
     <ClCompile Include="Core\Component\Transform.cpp" />
     <ClCompile Include="Core\Drawable\Box.cpp" />
     <ClCompile Include="Core\Drawable\Drawable.cpp" />
+    <ClCompile Include="Core\Drawable\SkyBox.cpp" />
     <ClCompile Include="Core\Drawable\Sphere.cpp" />
     <ClCompile Include="Core\Singleton\Graphics.cpp" />
     <ClCompile Include="Core\Common\d3dApp.cpp" />
@@ -214,6 +215,7 @@
     <ClInclude Include="Core\Bindable\PixelShader.h" />
     <ClInclude Include="Core\Bindable\RenderState\BlendState.h" />
     <ClInclude Include="Core\Bindable\RenderState\DepthStencilState.h" />
+    <ClInclude Include="Core\Bindable\RenderState\RenderStateBase.h" />
     <ClInclude Include="Core\Bindable\RenderState\SamplerState.h" />
     <ClInclude Include="Core\Bindable\Texture.h" />
     <ClInclude Include="Core\Bindable\Topology.h" />

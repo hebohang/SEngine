@@ -90,6 +90,9 @@
     <ClCompile Include="Core\Bindable\RenderState\DepthStencilState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Drawable\SkyBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Common\d3dApp.h">
@@ -189,6 +192,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Drawable\SkyBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Bindable\RenderState\RenderStateBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

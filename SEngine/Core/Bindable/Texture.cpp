@@ -28,7 +28,8 @@ Texture::Texture(const std::vector<std::wstring>& CubMapPath)
 
 	const wchar_t* jpg = L".jpg";
 	const wchar_t* png = L".png";
-	if (wcsstr(CubMapPath[0].c_str(), jpg) || wcsstr(CubMapPath[0].c_str(), png))
+	const wchar_t* bmp = L".bmp";
+	if (wcsstr(CubMapPath[0].c_str(), jpg) || wcsstr(CubMapPath[0].c_str(), png) || wcsstr(CubMapPath[0].c_str(), bmp))
 	{
 		HR(CreateWICTexture2DCubeFromFile(Graphics::GetDevice().Get(), Graphics::GetContext().Get(), CubMapPath, nullptr, pTexture.GetAddressOf(), false));
 	}

@@ -7,5 +7,5 @@ public:
 	BlendState();
 	void Bind() const override;
 private:
-	ComPtr<ID3D11BlendState> pSamplerState;
+	ComPtr<ID3D11BlendState> pBlendState;
 };

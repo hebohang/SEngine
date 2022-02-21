@@ -8,4 +8,4 @@
 #include "VertexShader.h"
 #include "TransformCBuffer.h"
 #include "Texture.h"
-#include "RenderState\SamplerState.h"
+#include "RenderState\RenderStateBase.h"
