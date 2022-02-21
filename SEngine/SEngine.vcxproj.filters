@@ -181,10 +181,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shader\Sphere_VS.hlsl" />
-    <FxCompile Include="Shader\Sphere_PS.hlsl" />
+    <FxCompile Include="Shader\SphereCol_VS.hlsl" />
+    <FxCompile Include="Shader\SphereCol_PS.hlsl" />
     <FxCompile Include="Shader\Box_PS.hlsl" />
     <FxCompile Include="Shader\Box_VS.hlsl" />
+    <FxCompile Include="Shader\SphereTex_VS.hlsl" />
+    <FxCompile Include="Shader\SphereTex_PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\Base.hlsli" />
