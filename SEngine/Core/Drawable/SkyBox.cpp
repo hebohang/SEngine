@@ -14,7 +14,7 @@ SkyBox::SkyBox(const std::vector<std::wstring>& CubMapPath)
 
 	AddBind(std::make_unique<Texture>(CubMapPath));
 	AddBind(std::make_unique<SamplerState>());
-	AddBind(std::make_unique<DepthStencilState>());
+	AddBind(std::make_unique<DepthStencilState>(DepthStencilStateType::LessEqual));
 
 	auto pVS = std::make_unique<VertexShader>(L"..\\SEngine\\Shader\\SkyBox_VS.cso", L"..\\SEngine\\Shader\\SkyBox_VS.hlsl");
 	auto pVSBlob = pVS->GetBlob();

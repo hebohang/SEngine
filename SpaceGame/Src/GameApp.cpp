@@ -9,7 +9,8 @@ GameApp::GameApp(HINSTANCE hInstance)
 	pCam(nullptr),
 	pEarth(nullptr),
 	pMoon(nullptr),
-	pSun(nullptr)
+	pSun(nullptr),
+	pSkyBox(nullptr)
 {
 }
 
@@ -32,6 +33,12 @@ bool GameApp::Init()
 	pMoon->trans.SetPosition(5.0f, 0.0f, 5.0f);
 	pSun = std::make_unique<Sphere>(8.0f, 20, 20, L"Texture\\Sun.jpg");
 	pSun->trans.SetPosition(-10.0f, 0.0f, 10.0f);
+	pSkyBox = std::make_unique<SkyBox>(
+		std::vector<std::wstring>{
+		L"Texture\\SkyBox\\sunset_posX.bmp", L"Texture\\SkyBox\\sunset_negX.bmp",
+		L"Texture\\SkyBox\\sunset_posY.bmp", L"Texture\\SkyBox\\sunset_negY.bmp",
+		L"Texture\\SkyBox\\sunset_posZ.bmp", L"Texture\\SkyBox\\sunset_negZ.bmp", }
+		);
 
 	m_pMouse->SetWindow(m_hMainWnd);
 	m_pMouse->SetMode(DirectX::Mouse::MODE_ABSOLUTE);
@@ -82,6 +89,7 @@ void GameApp::DrawScene()
 	pEarth->Draw();
 	pMoon->Draw();
 	pSun->Draw();
+	//pSkyBox->Draw();
 
 	HR(Graphics::GetSwapChain()->Present(0, 0));
 }

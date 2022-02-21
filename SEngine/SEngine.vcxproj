@@ -183,6 +183,7 @@
     <ClCompile Include="Core\Bindable\InputLayout.cpp" />
     <ClCompile Include="Core\Bindable\PixelShader.cpp" />
     <ClCompile Include="Core\Bindable\RenderState\DepthStencilState.cpp" />
+    <ClCompile Include="Core\Bindable\RenderState\RasterizerState.cpp" />
     <ClCompile Include="Core\Bindable\RenderState\SamplerState.cpp" />
     <ClCompile Include="Core\Bindable\Texture.cpp" />
     <ClCompile Include="Core\Bindable\Topology.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="Core\Bindable\PixelShader.h" />
     <ClInclude Include="Core\Bindable\RenderState\BlendState.h" />
     <ClInclude Include="Core\Bindable\RenderState\DepthStencilState.h" />
+    <ClInclude Include="Core\Bindable\RenderState\RasterizerState.h" />
     <ClInclude Include="Core\Bindable\RenderState\RenderStateBase.h" />
     <ClInclude Include="Core\Bindable\RenderState\SamplerState.h" />
     <ClInclude Include="Core\Bindable\Texture.h" />

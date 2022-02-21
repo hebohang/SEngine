@@ -39,4 +39,7 @@ Sphere::Sphere(float radius, UINT levels, UINT slices, const wchar_t* TexPath)
 	AddBind(std::make_unique<InputLayout>(sphere.vertices[0].GetInputElementVec(), pVSBlob));
 
 	AddBind(std::make_unique<PixelShader>(L"..\\SEngine\\Shader\\SphereTex_PS.cso", L"..\\SEngine\\Shader\\SphereTex_PS.hlsl"));
+
+	AddBind(std::make_unique<DepthStencilState>(DepthStencilStateType::NoDepthWriteWithStencil));
+	AddBind(std::make_unique<RasterizerState>(RasterizerStateType::BackCull));
 }
