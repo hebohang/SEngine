@@ -26,10 +26,10 @@ bool GameApp::Init()
 	pCam->LookAt({ 0.0f, 0.0f, -5.0f }, { 0.0f, 0.0f, 0.0f });
 	pCam->ActiveCamera();
 
-	pBox = std::make_unique<Box>();
-	pBox1 = std::make_unique<Box>();
-	pBox->trans.SetPosition(1.5f, 0.0f, 0.0f);
-	pBox1->trans.SetPosition(-1.5f, 0.0f, 0.0f);
+	//pBox = std::make_unique<Box>();
+	//pBox1 = std::make_unique<Box>();
+	//pBox->trans.SetPosition(1.5f, 0.0f, 0.0f);
+	//pBox1->trans.SetPosition(-1.5f, 0.0f, 0.0f);
 
 	pSphere = std::make_unique<Sphere>(1.0f, 20, 20, DirectX::XMFLOAT4{1.0f, 0.0f, 0.0f, 1.0f});
 	pSphere->trans.SetPosition(0.0f, 0.0f, 0.0f);	

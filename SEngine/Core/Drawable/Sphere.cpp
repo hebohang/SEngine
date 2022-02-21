@@ -10,12 +10,12 @@ Sphere::Sphere(float radius, UINT levels, UINT slices, const DirectX::XMFLOAT4& 
 	SphereGeo sphere(radius, levels, slices, color);
 	BindGeometry(sphere);
 
-	auto pVS = std::make_unique<VertexShader>(L"..\\SEngine\\Shader\\Cube_VS.cso", L"..\\SEngine\\Shader\\Cube_VS.hlsl");
+	auto pVS = std::make_unique<VertexShader>(L"..\\SEngine\\Shader\\Sphere_VS.cso", L"..\\SEngine\\Shader\\Sphere_VS.hlsl");
 	auto pVSBlob = pVS->GetBlob();
 	AddBind(std::move(pVS));
 	AddBind(std::make_unique<InputLayout>(sphere.vertices[0].GetInputElementVec(), pVSBlob));
 
-	AddBind(std::make_unique<PixelShader>(L"..\\SEngine\\Shader\\Cube_PS.cso", L"..\\SEngine\\Shader\\Cube_PS.hlsl"));
+	AddBind(std::make_unique<PixelShader>(L"..\\SEngine\\Shader\\Sphere_PS.cso", L"..\\SEngine\\Shader\\Sphere_PS.hlsl"));
 
 	AddBind(std::make_unique<Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
 

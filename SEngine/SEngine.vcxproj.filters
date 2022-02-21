@@ -169,10 +169,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shader\Cube.hlsli" />
+    <FxCompile Include="Shader\Sphere_VS.hlsl" />
+    <FxCompile Include="Shader\Sphere_PS.hlsl" />
+    <FxCompile Include="Shader\Box_PS.hlsl" />
+    <FxCompile Include="Shader\Box_VS.hlsl" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shader\Cube_PS.hlsl" />
-    <FxCompile Include="Shader\Cube_VS.hlsl" />
+    <None Include="Shader\Base.hlsli" />
   </ItemGroup>
 </Project>
