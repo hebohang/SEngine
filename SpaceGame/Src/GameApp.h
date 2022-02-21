@@ -22,13 +22,9 @@ public:
 	void DrawScene();
 
 private:
-	std::unique_ptr<Box> pBox;
-	std::unique_ptr<Box> pBox1;
+	std::unique_ptr<FirstPersonCamera> pCam;
+
 	std::unique_ptr<Sphere> pEarth;
 	std::unique_ptr<Sphere> pMoon;
 	std::unique_ptr<Sphere> pSun;
-
-	std::unique_ptr<FirstPersonCamera> pCam;
-
-	//std::vector<std::unique_ptr<class Drawable>> drawables;
 };

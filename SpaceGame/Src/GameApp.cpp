@@ -6,7 +6,6 @@ using namespace DirectX;
 GameApp::GameApp(HINSTANCE hInstance)
 	: 
 	D3DApp(hInstance),
-	pBox(nullptr),
 	pCam(nullptr),
 	pEarth(nullptr),
 	pMoon(nullptr),
@@ -26,11 +25,6 @@ bool GameApp::Init()
 	pCam = std::make_unique<FirstPersonCamera>();
 	pCam->LookAt({ 0.0f, 0.0f, -5.0f }, { 0.0f, 0.0f, 0.0f });
 	pCam->ActiveCamera();
-
-	//pBox = std::make_unique<Box>();
-	//pBox1 = std::make_unique<Box>();
-	//pBox->trans.SetPosition(1.5f, 0.0f, 0.0f);
-	//pBox1->trans.SetPosition(-1.5f, 0.0f, 0.0f);
 
 	pEarth = std::make_unique<Sphere>(1.0f, 20, 20, L"Texture\\Earth.jpg");
 	pEarth->trans.SetPosition(0.0f, 0.0f, 5.0f);
@@ -68,17 +62,7 @@ void GameApp::UpdateScene(float dt)
 		cubeTheta -= (mouseState.x - lastMouseState.x) * 0.01f;
 		cubePhi -= (mouseState.y - lastMouseState.y) * 0.01f;
 	}
-	if (keyState.IsKeyDown(Keyboard::W))
-		cubePhi += dt * 2;
-	if (keyState.IsKeyDown(Keyboard::S))
-		cubePhi -= dt * 2;
-	if (keyState.IsKeyDown(Keyboard::A))
-		cubeTheta += dt * 2;
-	if (keyState.IsKeyDown(Keyboard::D))
-		cubeTheta -= dt * 2;
 
-	//pBox->trans.RotateAxis({ 0.0f, 1.0f, 0.0f }, -cubeTheta);
-	//pBox->trans.RotateAxis({ 1.0f, 0.0f, 0.0f }, -cubePhi);
 	if (keyState.IsKeyDown(Keyboard::W))
 		pEarth->trans.Translate({ 0.0f, 0.0f, 1.0f }, 0.01f);
 	if (keyState.IsKeyDown(Keyboard::S))
@@ -95,9 +79,6 @@ void GameApp::DrawScene()
 	Graphics::GetContext()->ClearRenderTargetView(Graphics::GetRTV().Get(), reinterpret_cast<const float*>(&black));
 	Graphics::GetContext()->ClearDepthStencilView(Graphics::GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
-	// 绘制立方体
-	//pBox->Draw();
-	//pBox1->Draw();
 	pEarth->Draw();
 	pMoon->Draw();
 	pSun->Draw();
