@@ -24,8 +24,9 @@ public:
 private:
 	std::unique_ptr<Box> pBox;
 	std::unique_ptr<Box> pBox1;
-	std::unique_ptr<Sphere> pSphere;
-	std::unique_ptr<Sphere> pSphere1;
+	std::unique_ptr<Sphere> pEarth;
+	std::unique_ptr<Sphere> pMoon;
+	std::unique_ptr<Sphere> pSun;
 
 	std::unique_ptr<FirstPersonCamera> pCam;
 

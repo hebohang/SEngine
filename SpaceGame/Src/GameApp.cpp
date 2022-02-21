@@ -8,8 +8,9 @@ GameApp::GameApp(HINSTANCE hInstance)
 	D3DApp(hInstance),
 	pBox(nullptr),
 	pCam(nullptr),
-	pSphere(nullptr),
-	pSphere1(nullptr)
+	pEarth(nullptr),
+	pMoon(nullptr),
+	pSun(nullptr)
 {
 }
 
@@ -31,10 +32,12 @@ bool GameApp::Init()
 	//pBox->trans.SetPosition(1.5f, 0.0f, 0.0f);
 	//pBox1->trans.SetPosition(-1.5f, 0.0f, 0.0f);
 
-	pSphere = std::make_unique<Sphere>(1.0f, 20, 20, DirectX::XMFLOAT4{1.0f, 0.0f, 0.0f, 1.0f});
-	pSphere->trans.SetPosition(0.0f, 0.0f, 0.0f);	
-	pSphere1 = std::make_unique<Sphere>(0.5f, 20, 20, DirectX::XMFLOAT4{1.0f, 1.0f, 0.0f, 1.0f});
-	pSphere1->trans.SetPosition(1.0f, 0.0f, 0.0f);
+	pEarth = std::make_unique<Sphere>(1.0f, 20, 20, L"Texture\\Earth.jpg");
+	pEarth->trans.SetPosition(0.0f, 0.0f, 5.0f);
+	pMoon = std::make_unique<Sphere>(5.0f, 20, 20, L"Texture\\Moon.png");
+	pMoon->trans.SetPosition(5.0f, 0.0f, 5.0f);
+	pSun = std::make_unique<Sphere>(8.0f, 20, 20, L"Texture\\Sun.jpg");
+	pSun->trans.SetPosition(-10.0f, 0.0f, 10.0f);
 
 	m_pMouse->SetWindow(m_hMainWnd);
 	m_pMouse->SetMode(DirectX::Mouse::MODE_ABSOLUTE);
@@ -77,13 +80,13 @@ void GameApp::UpdateScene(float dt)
 	//pBox->trans.RotateAxis({ 0.0f, 1.0f, 0.0f }, -cubeTheta);
 	//pBox->trans.RotateAxis({ 1.0f, 0.0f, 0.0f }, -cubePhi);
 	if (keyState.IsKeyDown(Keyboard::W))
-		pSphere->trans.Translate({ 0.0f, 0.0f, 1.0f }, 0.01f);
+		pEarth->trans.Translate({ 0.0f, 0.0f, 1.0f }, 0.01f);
 	if (keyState.IsKeyDown(Keyboard::S))
-		pSphere->trans.Translate({ 0.0f, 0.0f, 1.0f }, -0.01f);
+		pEarth->trans.Translate({ 0.0f, 0.0f, 1.0f }, -0.01f);
 	if (keyState.IsKeyDown(Keyboard::A))
-		pSphere->trans.Translate({ 1.0f, 0.0f, 0.0f }, -0.01f);
+		pEarth->trans.Translate({ 1.0f, 0.0f, 0.0f }, -0.01f);
 	if (keyState.IsKeyDown(Keyboard::D))
-		pSphere->trans.Translate({ 1.0f, 0.0f, 0.0f }, 0.01f);
+		pEarth->trans.Translate({ 1.0f, 0.0f, 0.0f }, 0.01f);
 }
 
 void GameApp::DrawScene()
@@ -95,8 +98,9 @@ void GameApp::DrawScene()
 	// 绘制立方体
 	//pBox->Draw();
 	//pBox1->Draw();
-	pSphere->Draw();
-	pSphere1->Draw();
+	pEarth->Draw();
+	pMoon->Draw();
+	pSun->Draw();
 
 	HR(Graphics::GetSwapChain()->Present(0, 0));
 }

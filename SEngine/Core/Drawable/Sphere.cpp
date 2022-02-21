@@ -22,7 +22,7 @@ Sphere::Sphere(float radius, UINT levels, UINT slices, const DirectX::XMFLOAT4& 
 
 Sphere::Sphere(float radius, UINT levels, UINT slices, const wchar_t* TexPath)
 {
-	assert(!TexPath && "纹理路径为空");
+	assert(TexPath && "纹理路径为空");
 
 	AddBind(std::make_unique<Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
 	AddBind(std::make_unique<TransformCBuffer>(trans));
