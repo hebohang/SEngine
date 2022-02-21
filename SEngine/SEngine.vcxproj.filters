@@ -84,7 +84,10 @@
     <ClCompile Include="Core\Bindable\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Bindable\SamplerState.cpp">
+    <ClCompile Include="Core\Bindable\RenderState\SamplerState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Bindable\RenderState\DepthStencilState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -176,7 +179,13 @@
     <ClInclude Include="Core\Bindable\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Bindable\SamplerState.h">
+    <ClInclude Include="Core\Bindable\RenderState\SamplerState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Bindable\RenderState\DepthStencilState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Bindable\RenderState\BlendState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

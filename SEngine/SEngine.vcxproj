@@ -182,7 +182,8 @@
     <ClCompile Include="Core\Bindable\IndexBuffer.cpp" />
     <ClCompile Include="Core\Bindable\InputLayout.cpp" />
     <ClCompile Include="Core\Bindable\PixelShader.cpp" />
-    <ClCompile Include="Core\Bindable\SamplerState.cpp" />
+    <ClCompile Include="Core\Bindable\RenderState\DepthStencilState.cpp" />
+    <ClCompile Include="Core\Bindable\RenderState\SamplerState.cpp" />
     <ClCompile Include="Core\Bindable\Texture.cpp" />
     <ClCompile Include="Core\Bindable\Topology.cpp" />
     <ClCompile Include="Core\Bindable\TransformCBuffer.cpp" />
@@ -211,7 +212,9 @@
     <ClInclude Include="Core\Bindable\IndexBuffer.h" />
     <ClInclude Include="Core\Bindable\InputLayout.h" />
     <ClInclude Include="Core\Bindable\PixelShader.h" />
-    <ClInclude Include="Core\Bindable\SamplerState.h" />
+    <ClInclude Include="Core\Bindable\RenderState\BlendState.h" />
+    <ClInclude Include="Core\Bindable\RenderState\DepthStencilState.h" />
+    <ClInclude Include="Core\Bindable\RenderState\SamplerState.h" />
     <ClInclude Include="Core\Bindable\Texture.h" />
     <ClInclude Include="Core\Bindable\Topology.h" />
     <ClInclude Include="Core\Bindable\TransformCBuffer.h" />
