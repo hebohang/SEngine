@@ -188,6 +188,9 @@
     <ClInclude Include="Core\Bindable\RenderState\BlendState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Drawable\SkyBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\SphereCol_VS.hlsl" />
@@ -196,8 +199,11 @@
     <FxCompile Include="Shader\Box_VS.hlsl" />
     <FxCompile Include="Shader\SphereTex_VS.hlsl" />
     <FxCompile Include="Shader\SphereTex_PS.hlsl" />
+    <FxCompile Include="Shader\SkyBox_VS.hlsl" />
+    <FxCompile Include="Shader\SkyBox_PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\Base.hlsli" />
+    <None Include="Shader\SkyBox.hlsli" />
   </ItemGroup>
 </Project>

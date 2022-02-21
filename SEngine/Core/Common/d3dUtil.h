@@ -184,7 +184,25 @@ HRESULT CreateShaderFromFile(
 	LPCSTR shaderModel,
 	ID3DBlob** ppBlobOut);
 
-
+// ------------------------------
+// CreateWICTexture2DCubeFromFile函数
+// ------------------------------
+// 根据按D3D11_TEXTURECUBE_FACE索引顺序给定的六张纹理，创建纹理立方体
+// 要求位图是同样宽高、数据格式的正方形
+// 你也可以给定超过6张的纹理，然后在获取到纹理数组的基础上自行创建更多的资源视图
+// [In]d3dDevice			D3D设备
+// [In]d3dDeviceContext		D3D设备上下文
+// [In]cubeMapFileNames		位图文件名数组
+// [OutOpt]textureArray		输出的纹理数组资源
+// [OutOpt]textureCubeView	输出的纹理立方体资源视图
+// [In]generateMips			是否生成mipmaps
+HRESULT CreateWICTexture2DCubeFromFile(
+	ID3D11Device* d3dDevice,
+	ID3D11DeviceContext* d3dDeviceContext,
+	const std::vector<std::wstring>& cubeMapFileNames,
+	ID3D11Texture2D** textureArray,
+	ID3D11ShaderResourceView** textureCubeView,
+	bool generateMips = false);
 
 
 #endif
