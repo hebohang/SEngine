@@ -192,6 +192,8 @@
     <ClCompile Include="Core\Common\d3dUtil.cpp" />
     <ClCompile Include="Core\ErrorHandle\DXTrace.cpp" />
     <ClCompile Include="Core\Vertex\Vertex.cpp" />
+    <ClCompile Include="Dependencies\DirectXTex\DDSTextureLoader\DDSTextureLoader11.cpp" />
+    <ClCompile Include="Dependencies\DirectXTex\WICTextureLoader\WICTextureLoader11.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="Core\Common\GameTimer.cpp" />
     <ClCompile Include="Core\Common\Keyboard.cpp" />
@@ -221,6 +223,8 @@
     <ClInclude Include="Core\Common\d3dUtil.h" />
     <ClInclude Include="Core\ErrorHandle\DXTrace.h" />
     <ClInclude Include="Core\Vertex\Vertex.h" />
+    <ClInclude Include="Dependencies\DirectXTex\DDSTextureLoader\DDSTextureLoader11.h" />
+    <ClInclude Include="Dependencies\DirectXTex\WICTextureLoader\WICTextureLoader11.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="Core\Common\GameTimer.h" />
     <ClInclude Include="Core\Common\Keyboard.h" />

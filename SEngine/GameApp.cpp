@@ -81,9 +81,9 @@ void GameApp::UpdateScene(float dt)
 	if (keyState.IsKeyDown(Keyboard::S))
 		pSphere->trans.Translate({ 0.0f, 0.0f, 1.0f }, -0.01f);
 	if (keyState.IsKeyDown(Keyboard::A))
-		pSphere->trans.Translate({ 1.0f, 0.0f, 0.0f }, 0.01f);
-	if (keyState.IsKeyDown(Keyboard::D))
 		pSphere->trans.Translate({ 1.0f, 0.0f, 0.0f }, -0.01f);
+	if (keyState.IsKeyDown(Keyboard::D))
+		pSphere->trans.Translate({ 1.0f, 0.0f, 0.0f }, 0.01f);
 }
 
 void GameApp::DrawScene()

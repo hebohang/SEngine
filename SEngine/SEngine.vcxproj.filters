@@ -78,6 +78,12 @@
     <ClCompile Include="Core\Drawable\Sphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Dependencies\DirectXTex\DDSTextureLoader\DDSTextureLoader11.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dependencies\DirectXTex\WICTextureLoader\WICTextureLoader11.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Common\d3dApp.h">
@@ -159,6 +165,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Drawable\Sphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\DirectXTex\DDSTextureLoader\DDSTextureLoader11.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\DirectXTex\WICTextureLoader\WICTextureLoader11.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
