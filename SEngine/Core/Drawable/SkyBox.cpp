@@ -39,10 +39,10 @@ SkyBox::SkyBox(const std::wstring& CubMapPath)
 	AddBind(std::make_unique<RasterizerState>(RasterizerStateType::NoCull));
 	AddBind(std::make_unique<DepthStencilState>(DepthStencilStateType::LessEqual));
 
-	auto pVS = std::make_unique<VertexShader>(L"..\\SEngine\\Shader\\SkyBox_VS.cso", L"..\\SEngine\\Shader\\SkyBox_VS.hlsl");
+	auto pVS = std::make_unique<VertexShader>(L"Shader\\SkyBox_VS.cso", L"Shader\\SkyBox_VS.hlsl");
 	auto pVSBlob = pVS->GetBlob();
 	AddBind(std::move(pVS));
 	AddBind(std::make_unique<InputLayout>(sphere.vertices[0].GetInputElementVec(), pVSBlob));
 
-	AddBind(std::make_unique<PixelShader>(L"..\\SEngine\\Shader\\SkyBox_PS.cso", L"..\\SEngine\\Shader\\SkyBox_PS.hlsl"));
+	AddBind(std::make_unique<PixelShader>(L"Shader\\SkyBox_PS.cso", L"Shader\\SkyBox_PS.hlsl"));
 }

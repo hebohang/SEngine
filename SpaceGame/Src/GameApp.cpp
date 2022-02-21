@@ -67,12 +67,6 @@ void GameApp::UpdateScene(float dt)
 	if (keyState.IsKeyDown(Keyboard::D))
 		pCam->Strafe(dt * 6.0f);
 
-	//// 将摄像机位置限制在[-8.9, 8.9]x[-8.9, 8.9]x[0.0, 8.9]的区域内
-	//// 不允许穿地
-	//XMFLOAT3 adjustedPos;
-	//XMStoreFloat3(&adjustedPos, XMVectorClamp(pCam->GetPositionXM(), XMVectorSet(-8.9f, 0.0f, -8.9f, 0.0f), XMVectorReplicate(8.9f)));
-	//pCam->SetPosition(adjustedPos);
-
 	// 在鼠标没进入窗口前仍为ABSOLUTE模式
 	if (mouseState.positionMode == Mouse::MODE_RELATIVE)
 	{
@@ -89,7 +83,7 @@ void GameApp::UpdateScene(float dt)
 
 void GameApp::DrawScene()
 {
-	static float black[4] = { 0.0f, 0.0f, 0.0f, 1.0f };	// RGBA = (0,0,0,255)
+	static float black[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
 	Graphics::GetContext()->ClearRenderTargetView(Graphics::GetRTV().Get(), reinterpret_cast<const float*>(&black));
 	Graphics::GetContext()->ClearDepthStencilView(Graphics::GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 

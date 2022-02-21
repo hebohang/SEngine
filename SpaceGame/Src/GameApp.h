@@ -8,12 +8,6 @@
 class GameApp : public D3DApp
 {
 public:
-	struct ConstantBuffer
-	{
-		DirectX::XMMATRIX world;
-	};
-
-public:
 	GameApp(HINSTANCE hInstance);
 	~GameApp();
 
