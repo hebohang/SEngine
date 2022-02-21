@@ -33,12 +33,7 @@ bool GameApp::Init()
 	pMoon->trans.SetPosition(15.0f, 0.0f, 5.0f);
 	pSun = std::make_unique<Sphere>(10.0f, 20, 20, L"Texture\\Sun.jpg");
 	pSun->trans.SetPosition(-20.0f, 0.0f, 10.0f);
-	pSkyBox = std::make_unique<SkyBox>(
-		std::vector<std::wstring>{
-		L"Texture\\SkyBox\\sunset_posX.bmp", L"Texture\\SkyBox\\sunset_negX.bmp",
-		L"Texture\\SkyBox\\sunset_posY.bmp", L"Texture\\SkyBox\\sunset_negY.bmp",
-		L"Texture\\SkyBox\\sunset_posZ.bmp", L"Texture\\SkyBox\\sunset_negZ.bmp", }
-		);
+	pSkyBox = std::make_unique<SkyBox>(L"Texture\\SkyBox\\skybox.dds");
 
 	m_pMouse->SetWindow(m_hMainWnd);
 	m_pMouse->SetMode(DirectX::Mouse::MODE_RELATIVE);

@@ -37,7 +37,7 @@ Texture::Texture(const std::vector<std::wstring>& CubMapPath)
 
 Texture::Texture(const std::wstring& cubemapFilename)
 {
-	HRESULT hr;
+	pTexture.Reset();
 	// 天空盒纹理加载
 	if (cubemapFilename.substr(cubemapFilename.size() - 3) == L"dds")
 	{
